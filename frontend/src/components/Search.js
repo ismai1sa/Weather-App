@@ -9,6 +9,7 @@ function Search(){
   const [wind,setWind] = useState('')
   const [show,setShow] = useState(false)
   const [namecity,setNameCity] = useState('')
+  const [show_none,set_Shownone]=useState('')
   const CityNamehandlechange = (e)=>{
     setCity(e.target.value)
   } 
@@ -33,11 +34,15 @@ function Search(){
         setHumidity(datastring.current.humidity)
         setWind(datastring.current.wind_mph)
         setShow(true)
+        set_Shownone(false)
 
     })
      .catch((error) => {
      console.error(error)
-     setNameCity('Not found')}
+     setShow(false)
+     set_Shownone(true)
+
+     }
                  
     )
   }
@@ -48,6 +53,7 @@ function Search(){
         <input className='btn' type="submit" value="Search" />
       </form>
      {show && <Weather name={namecity} temp={temp} humidity={humidity} wind={wind}/>}
+      {show_none && <p>Not found</p>}
   </div>
   )
 }
